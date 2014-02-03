@@ -36,6 +36,7 @@ public class Maybe<T> {
         return data;
     }
 
+    @Override
     public boolean equals(Object o) {
         if(!(o instanceof Maybe)) {
             return false;
@@ -43,5 +44,12 @@ public class Maybe<T> {
         Maybe that = (Maybe)o;
         return this.none == that.none
             && this.data == that.data;
+    }
+
+    @Override
+    public String toString() {
+        return none
+            ? "None"
+            : "Some(" + data + ")";
     }
 }
