@@ -3,6 +3,12 @@ java-maybe
 
 Maybe (some/none) in java.
 
+API
+---
+
+Available in the docs folder,
+or online [here](http://duta.github.io/java-maybe/).
+
 Basic usage
 -----------
 
