@@ -1,3 +1,7 @@
+/**
+ * Represents an<a href="http://bit.ly/1bkU5sM">option type</a>.
+ * It comes in two forms, some and none.
+ */
 public class Maybe<T> {
     private final T data;
     private final boolean none;
@@ -13,6 +17,10 @@ public class Maybe<T> {
     }
 
     public static <T> Maybe<T> some(T data) {
+        if(data == null) {
+            throw new MaybeException(
+                "Can't have Some(null)");
+        }
         return new Maybe<T>(data);
     }
 
@@ -31,7 +39,7 @@ public class Maybe<T> {
     public T get() {
         if(none) {
             throw new MaybeException(
-                "Can't get from none");
+                "Can't get from None");
         }
         return data;
     }
