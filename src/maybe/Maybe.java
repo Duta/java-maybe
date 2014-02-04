@@ -1,5 +1,7 @@
+package maybe;
+
 /**
- * Represents an<a href="http://bit.ly/1bkU5sM">option type</a>.
+ * Represents an <a href="http://bit.ly/1bkU5sM">option type</a>.
  * It comes in two forms, some and none.
  */
 public class Maybe<T> {
