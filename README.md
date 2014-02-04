@@ -12,93 +12,107 @@ or online [here](http://duta.github.io/java-maybe/).
 Basic usage
 -----------
 
-    Maybe<Integer> three = Maybe.some(3);
-    // Prints "3"
-    print(three.isSome() ? three.get() : "None");
-    // Prints "Some(3)"
-    print(three);
+```java
+Maybe<Integer> three = Maybe.some(3);
+// Prints "3"
+print(three.isSome() ? three.get() : "None");
+// Prints "Some(3)"
+print(three);
 
-    Maybe<Integer> none = Maybe.none();
-    // Prints "None"
-    print(none.isSome() ? none.get() : "None");
-    // Prints "None"
-    print(none);
+Maybe<Integer> none = Maybe.none();
+// Prints "None"
+print(none.isSome() ? none.get() : "None");
+// Prints "None"
+print(none);
+```
 
 Example function
 ----------------
 
 Non-maybe definition:
 
-    public Vec3 add(Vec3 a, Vec3 b) {
-        if(a == null) {
-            throw new IllegalArgumentException(
-                "a cannot be null");
-        }
-        if(b == null) {
-            throw new IllegalArgumentException(
-                "a cannot be null");
-        }
-        return new Vec3(
-            a.getX() + b.getX(),
-            a.getY() + b.getY(),
-            a.getZ() + b.getZ());
+```java
+public Vec3 add(Vec3 a, Vec3 b) {
+    if(a == null) {
+        throw new IllegalArgumentException(
+            "a cannot be null");
     }
+    if(b == null) {
+        throw new IllegalArgumentException(
+            "a cannot be null");
+    }
+    return new Vec3(
+        a.getX() + b.getX(),
+        a.getY() + b.getY(),
+        a.getZ() + b.getZ());
+}
+```
 
 Maybe definition:
 
-    public Maybe<Vec3> add(Maybe<Vec3> a, Maybe<Vec3> b) {
-        if(a == null || a.isNone()
-        || b == null || b.isNone()) {
-            return Maybe.none();
-        }
-        Vec3 aRaw = a.get();
-        Vec3 bRaw = b.get();
-        return Maybe.some(new Vec3(
-            aRaw.getX() + bRaw.getX(),
-            aRaw.getY() + bRaw.getY(),
-            aRaw.getZ() + bRaw.getZ()));
+```java
+public Maybe<Vec3> add(Maybe<Vec3> a, Maybe<Vec3> b) {
+    if(a == null || a.isNone()
+    || b == null || b.isNone()) {
+        return Maybe.none();
     }
+    Vec3 aRaw = a.get();
+    Vec3 bRaw = b.get();
+    return Maybe.some(new Vec3(
+        aRaw.getX() + bRaw.getX(),
+        aRaw.getY() + bRaw.getY(),
+        aRaw.getZ() + bRaw.getZ()));
+}
+```
 
 * * *
 
 Non-maybe safe usage:
 
-    Vec3 a = ...;
-    Vec3 b = ...;
-    Vec3 result;
-    try {
-        result = add(a, b);
-    } catch(IllegalArgumentException ex) {
-        // Take appropriate action
-    }
-    System.out.println(result);
+```java
+Vec3 a = ...;
+Vec3 b = ...;
+Vec3 result;
+try {
+    result = add(a, b);
+} catch(IllegalArgumentException ex) {
+    // Take appropriate action
+}
+System.out.println(result);
+```
 
 Maybe safe usage:
 
-    Maybe<Vec3> a = ...;
-    Maybe<Vec3> b = ...;
-    Maybe<Vec3> result = add(a, b);
-    if(result.isNone()) {
-        // Take appropriate action
-    } else {
-        System.out.println(result.get());
-    }
+```java
+Maybe<Vec3> a = ...;
+Maybe<Vec3> b = ...;
+Maybe<Vec3> result = add(a, b);
+if(result.isNone()) {
+    // Take appropriate action
+} else {
+    System.out.println(result.get());
+}
+```
 
 * * *
 
 Non-maybe unsafe usage:
 
-    Vec3 a = ...;
-    Vec3 b = ...;
-    Vec3 result = add(a, b);
-    System.out.println(result);
+```java
+Vec3 a = ...;
+Vec3 b = ...;
+Vec3 result = add(a, b);
+System.out.println(result);
+```
 
 Maybe unsafe usage:
 
-    Maybe<Vec3> a = ...;
-    Maybe<Vec3> b = ...;
-    Maybe<Vec3> result = add(a, b);
-    System.out.println(result.get());
+```java
+Maybe<Vec3> a = ...;
+Maybe<Vec3> b = ...;
+Maybe<Vec3> result = add(a, b);
+System.out.println(result.get());
+```
 
 Notes
 -----
@@ -106,9 +120,13 @@ Notes
 If the compiler can't figure out the type of
 `Maybe` you want when doing something like:
 
-    Maybe.none()
+```java
+Maybe.none()
+```
 
 Write the following instead (replacing String
 with whatever type you actually want it to be):
 
-    Maybe.<String>none()
+```java
+Maybe.<String>none()
+```
