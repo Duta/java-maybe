@@ -2,7 +2,7 @@ package maybe;
 
 /**
  * Represents an <a href="http://bit.ly/1bkU5sM">option type</a>.
- * It comes in two forms, some and none.
+ * It comes in two forms, Some and None.
  */
 public class Maybe<T> {
     private final T data;
@@ -18,6 +18,13 @@ public class Maybe<T> {
         this.none = false;
     }
 
+    /**
+     * Constructs a Some with the given data.
+     *
+     * @param data the data to store in the Some
+     * @return a Some containing the given data
+     * @throws MaybeException if the given data is null
+     */
     public static <T> Maybe<T> some(T data) {
         if(data == null) {
             throw new MaybeException(
@@ -26,18 +33,41 @@ public class Maybe<T> {
         return new Maybe<T>(data);
     }
 
+    /**
+     * Constructs a None.
+     *
+     * @return a None
+     */
     public static <T> Maybe<T> none() {
         return new Maybe<T>();
     }
 
+    /**
+     * Returns <code>true</code> if this is a Some.
+     *
+     * @return <code>true</code> if this is a Some
+     * @see #isNone()
+     */
     public boolean isSome() {
         return !none;
     }
 
+    /**
+     * Returns <code>true</code> if this is a None.
+     *
+     * @return <code>true</code> if this is a None
+     * @see #isSome()
+     */
     public boolean isNone() {
         return none;
     }
 
+    /**
+     * Returns this Some's data.
+     *
+     * @return the data contained in this Some
+     * @throws MaybeException if this is None
+     */
     public T get() {
         if(none) {
             throw new MaybeException(
