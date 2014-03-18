@@ -39,7 +39,7 @@ public Vec3 add(Vec3 a, Vec3 b) {
     }
     if(b == null) {
         throw new IllegalArgumentException(
-            "a cannot be null");
+            "b cannot be null");
     }
     return new Vec3(
         a.getX() + b.getX(),
@@ -112,6 +112,23 @@ Maybe<Vec3> a = ...;
 Maybe<Vec3> b = ...;
 Maybe<Vec3> result = add(a, b);
 System.out.println(result.get());
+```
+
+Querying multiple data sources
+------------------------------
+
+When working with methods that return a Maybe:
+
+```java
+Maybe<User> user = onlineDB.findUser(name)
+    .or(localDB.findUser(name));
+```
+
+When working with methods that do not return a Maybe:
+
+```java
+Maybe<User> user = Maybe.perhaps(onlineDB.findUser(name))
+    .or(localDB.findUser(name));
 ```
 
 Notes

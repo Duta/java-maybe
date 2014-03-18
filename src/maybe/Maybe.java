@@ -34,12 +34,54 @@ public class Maybe<T> {
     }
 
     /**
+     * If the given data is null, returns a None.
+     * Otherwise, returns a Some with the given data.
+     *
+     * @param data the data to store
+     * @return a Some containing the given data
+     *         if it is non-null, a None otherwise
+     */
+    public static <T> Maybe<T> perhaps(T data) {
+        return data != null
+            ? Maybe.some(data)
+            : Maybe.<T>none();
+    }
+
+    /**
      * Constructs a None.
      *
      * @return a None
      */
     public static <T> Maybe<T> none() {
         return new Maybe<T>();
+    }
+
+    /**
+     * "Or"s the Maybe.
+     * If this is a None, returns a Some
+     * containing <code>alternateData</code>.
+     * Otherwise, just returns this.
+     *
+     * @param alternateData the data to use is this is a None
+     * @return a Some containing alternateData
+     *         if this is a None, this otherwise
+     */
+    public Maybe<T> or(T alternateData) {
+        return none
+            ? Maybe.some(alternateData)
+            : this;
+    }
+
+    /**
+     * "Or"s the Maybe.
+     * If this is a None, returns <code>alternateMaybe</code>.
+     * Otherwise, just returns this.
+     *
+     * @param alternateMaybe the Maybe to use is this is a None
+     * @return alternateMaybe if this is a None, this otherwise
+     */
+    public Maybe<T> or(Maybe<T> alternateMaybe) {
+        return none ? alternateMaybe : this;
     }
 
     /**
